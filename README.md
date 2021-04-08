@@ -1,1 +1,1 @@
-# Unsplash API project# react-unsplash
+# Unsplash image project

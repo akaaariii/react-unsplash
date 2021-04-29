@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import Pagination from '@material-ui/lab/Pagination'
 import unsplash from '../api/unsplash'
-import ImageList from './ImageList';
+import ImageList from './ImageList'
 import SearchBar from './SearchBar'
+import { makeStyles } from '@material-ui/core/styles'
+
+
+const useStyles = makeStyles(() => ({
+  root: {
+    '& > *': {
+      justifyContent: 'center',
+    },
+  },
+}));
 
 const App = () => {
+  const classes = useStyles();
   const [term, setTerm] = useState('cafe');
   const [query, setQuery] = useState(term);
   const [images, setImages] = useState([]);
@@ -47,7 +58,7 @@ const App = () => {
       <SearchBar onSubmit={onFormSubmit} onChangeInput={onChangeInput} term={term} />
       <ImageList images={images} />
       {images.length ? 
-        <Pagination count={10} page={page} onChange={onChangePage} /> 
+        <Pagination count={10} page={page} onChange={onChangePage} className={classes.root} />
         : null
       }
     </div>

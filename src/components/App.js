@@ -5,7 +5,7 @@ import ImageList from './ImageList';
 import SearchBar from './SearchBar'
 
 const App = () => {
-  const [term, setTerm] = useState('');
+  const [term, setTerm] = useState('cafe');
   const [query, setQuery] = useState(term);
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);

@@ -1,29 +1,57 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import Pagination from '@material-ui/lab/Pagination'
 import unsplash from '../api/unsplash'
 import ImageList from './ImageList';
 import SearchBar from './SearchBar'
 
-class App extends React.Component {
-  state = { images: [] };
+const App = () => {
+  const [term, setTerm] = useState('');
+  const [query, setQuery] = useState(term);
+  const [images, setImages] = useState([]);
+  const [page, setPage] = useState(1);
 
-  onSearchSubmit = async (term) => {
+
+  const getData = async () => {
     const response = await unsplash.get('/search/photos', {
       params: { 
-        query: term,
-        per_page: 20,
+        query: query,
+        per_page: 10,
+        page: page
       },
     });
-    this.setState({ images: response.data.results })
+    setImages(response.data.results);
   }
 
-  render() {
-    return (
-      <div className="ui container" style={{ marginTop: '10px' }}>
-        <SearchBar onSubmit={this.onSearchSubmit} />
-        <ImageList images={this.state.images} />
-      </div>
-    )
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    setPage(1);
+    setQuery(term);
   }
+
+  const onChangeInput = (e) => {
+    setTerm(e.target.value);
+  }
+
+  const onChangePage = (event, value) => {
+    setPage(value);
+  }
+
+  useEffect(() => {
+    getData();
+    window.scrollTo(0, 0);
+  }, [query, page])
+
+  
+  return (
+    <div className="ui container" style={{ marginTop: '10px', paddingBottom: '20px' }}>
+      <SearchBar onSubmit={onFormSubmit} onChangeInput={onChangeInput} term={term} />
+      <ImageList images={images} />
+      {images.length ? 
+        <Pagination count={10} page={page} onChange={onChangePage} /> 
+        : null
+      }
+    </div>
+  )
 }
 
 export default App

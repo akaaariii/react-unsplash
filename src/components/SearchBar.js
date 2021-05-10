@@ -6,11 +6,11 @@ const SearchBar = ({ onSubmit, term, onChangeInput }) => {
     <div className="ui segment">
       <form className="ui form" onSubmit={onSubmit}>
         <div className="field">
-          <label>Search photos</label>
+          <label>Search Photos</label>
           <input 
             type="text" 
             value={term}
-            placeholder="Search photos (*e.g.: canada)"
+            placeholder="Search photos (*e.g: canada, cafe, beach, architecture)"
             onChange={onChangeInput} 
           />
         </div>

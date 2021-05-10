@@ -12,12 +12,18 @@ const useStyles = makeStyles(() => ({
       justifyContent: 'center',
     },
   },
+  textCenter: {
+    textAlign: 'center',
+  },
+  font: {
+    fontFamily: "'Charm', cursive",
+  }
 }));
 
 const App = () => {
   const classes = useStyles();
-  const [term, setTerm] = useState('cafe');
-  const [query, setQuery] = useState(term);
+  const [term, setTerm] = useState('');
+  const [query, setQuery] = useState('cafe');
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   const title = query.substring(0, 1).toUpperCase() + query.substring(1).toLowerCase();
@@ -38,6 +44,7 @@ const App = () => {
     e.preventDefault();
     setPage(1);
     setQuery(term);
+    setTerm('');
   }
 
   const onChangeInput = (e) => {
@@ -56,8 +63,9 @@ const App = () => {
   
   return (
     <div className="ui container" style={{ marginTop: '10px', paddingBottom: '20px' }}>
+      <h1 className={classes.textCenter + " " + classes.font}>Let's Find Beautiful Photos <i className="camera retro icon"></i></h1>
       <SearchBar onSubmit={onFormSubmit} onChangeInput={onChangeInput} term={term} />
-      <h1><i class="camera retro icon"></i>{title}</h1>
+      <h2 className={classes.font}>Photos: {title}</h2>
       <ImageList images={images} />
       {images.length ? 
         <Pagination count={10} page={page} onChange={onChangePage} className={classes.root} />

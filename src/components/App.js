@@ -15,8 +15,8 @@ const useStyles = makeStyles(() => ({
     textAlign: 'center',
   },
   font: {
-    fontFamily: "'Quintessential', cursive",
-    letterSpacing: 0.6,
+    fontFamily: "'Quintessential', cursive !important",
+    letterSpacing: '-0.01em',
   },
 }))
 

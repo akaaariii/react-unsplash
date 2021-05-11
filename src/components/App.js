@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   },
   font: {
     fontFamily: "'Quintessential', cursive",
-    letterSpacing: 0.9,
+    letterSpacing: 0.6,
   },
 }))
 
